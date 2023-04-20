@@ -130,6 +130,10 @@ AVL_BST_TREE* insertion(AVL_BST_TREE* _tree, int _key) {
 		_tree->right = insertion(_tree->right, _key);
 	}
 
+	else if (_tree->key == _key) {
+		return _tree;
+	}
+
 	_tree->hieght = 1 + getMax(getHieght(_tree->right), getHieght(_tree->left));
 
 	int _balanced_factor = getBalancedFactor(_tree);
@@ -183,6 +187,24 @@ void print_tree_preoder(AVL_BST_TREE* _tree) {
 	print_tree_preoder(_tree->right);
 }
 
+void print_tree_postoder(AVL_BST_TREE* _tree) {
+	if (_tree == NULL) return;
+	print_tree_preoder(_tree->left);
+	print_tree_preoder(_tree->right);
+	std::cout << (_tree->key) << " , ";
+	int _balanced_factor = getBalancedFactor(_tree);
+	std::cout << "_value_ == " << _tree->key << "_balanced_factor" << _balanced_factor << " , hieght" << getHieght(_tree) << std::endl;
+}
+
+void print_tree_inoder(AVL_BST_TREE* _tree) {
+	if (_tree == NULL) return;
+	print_tree_preoder(_tree->left);
+	std::cout << (_tree->key) << " , ";
+	int _balanced_factor = getBalancedFactor(_tree);
+	std::cout << "_value_ == " << _tree->key << "_balanced_factor" << _balanced_factor << " , hieght" << getHieght(_tree) << std::endl;
+	print_tree_preoder(_tree->right);
+}
+
 void levelorder_newline(AVL_BST_TREE *v) {
 	std::queue <AVL_BST_TREE *> q;
 	struct AVL_BST_TREE* cur;
@@ -219,14 +241,15 @@ int main() {
 	/* Constructing tree given in
 	the above figure */
 	_tree = insertion(_tree, 10);
-	_tree = insertion(_tree, 9);
+	_tree = insertion(_tree, 10);
 	_tree = insertion(_tree, 9);
 	_tree = insertion(_tree, 8);
 	_tree = insertion(_tree, 7);
 	_tree = insertion(_tree, 6);
 
 	print_tree_preoder(_tree);
-	levelorder_newline(_tree);
+	print_tree_inoder(_tree);
+	print_tree_postoder(_tree);
 
 	return 0;
 }
