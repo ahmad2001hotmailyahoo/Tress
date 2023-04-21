@@ -275,6 +275,10 @@ int findMaximunValue(AVL_BST_TREE* _tree) {
 	return _minimum_value;
 }
 
+int findHieght(AVL_BST_TREE* _tree) {
+	if (_tree == NULL) return -1;
+	return fmax(findHieght(_tree->left), findHieght(_tree->right))+1;
+}
 
 int main() {
 	AVL_BST_TREE* _tree = NULL;
@@ -291,10 +295,13 @@ int main() {
 	print_tree_preoder(_tree);
 	print_tree_inoder(_tree);
 	print_tree_postoder(_tree);
+	levelorder_newline(_tree);
 
 	std::cout << "is 10 present:" << (search(_tree, 10) ? "Yes" : "No") << std::endl;
 	std::cout << "Maximum Value:" << findMaximunValue(_tree) << std::endl;
 	std::cout << "Minimum Value:" << findMinimunValue(_tree) << std::endl;
+
+	std::cout << "Hieght of Tree is:" << findHieght(_tree) << std::endl;
 	return 0;
 }
 
