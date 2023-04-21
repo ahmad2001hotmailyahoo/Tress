@@ -118,6 +118,26 @@ AVL_BST_TREE* RLRotation(AVL_BST_TREE* _tree) {
 	return tp2;
 }
 
+AVL_BST_TREE* deletion(AVL_BST_TREE* _tree, int _key) {
+	if (_tree == NULL)
+		return _tree;
+	else if (_tree->key > _key)
+		deletion(_tree->left, _key);
+	else if (_tree->key < _key)
+		deletion(_tree->right, _key);
+	//else if (_tree->key == _key) {
+		//_tre
+	//}
+
+}
+
+bool search(AVL_BST_TREE* _tree, int _key) {
+	if (_tree == NULL) return false;
+	else if (_tree->key == _key) return true;
+	else if(_tree->key > _key)	return search(_tree->left,_key);
+	else if (_tree->key < _key) return search(_tree->right,_key);
+}
+
 AVL_BST_TREE* insertion(AVL_BST_TREE* _tree, int _key) {
 	if (_tree == NULL) {
 		return  createNode(_key);
@@ -251,6 +271,7 @@ int main() {
 	print_tree_inoder(_tree);
 	print_tree_postoder(_tree);
 
+	std::cout << "is 10 present:" << (search(_tree, 10) ? "Yes" : "No") << std::endl;
 	return 0;
 }
 
