@@ -255,6 +255,27 @@ void levelorder_newline(AVL_BST_TREE *v) {
 	}
 }
 
+int findMinimunValue(AVL_BST_TREE* _tree) {
+	AVL_BST_TREE* _current = _tree;
+	int _minimum_value = 0;
+	while (_current != NULL) {
+		_minimum_value = _current->key;
+		_current = _current->left;
+	}
+	return _minimum_value;
+}
+
+int findMaximunValue(AVL_BST_TREE* _tree) {
+	AVL_BST_TREE* _current = _tree;
+	int _minimum_value = 0;
+	while (_current != NULL) {
+		_minimum_value = _current->key;
+		_current = _current->right;
+	}
+	return _minimum_value;
+}
+
+
 int main() {
 	AVL_BST_TREE* _tree = NULL;
 
@@ -272,6 +293,8 @@ int main() {
 	print_tree_postoder(_tree);
 
 	std::cout << "is 10 present:" << (search(_tree, 10) ? "Yes" : "No") << std::endl;
+	std::cout << "Maximum Value:" << findMaximunValue(_tree) << std::endl;
+	std::cout << "Minimum Value:" << findMinimunValue(_tree) << std::endl;
 	return 0;
 }
 
